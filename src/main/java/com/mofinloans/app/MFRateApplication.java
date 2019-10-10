@@ -1,7 +1,9 @@
 package com.mofinloans.app;
 
+import org.apache.poi.ss.formula.FormulaParser;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.ss.util.CellReference;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,13 +25,13 @@ public class MFRateApplication {
 
             Workbook workbook = engine.getSpreadsheet().getWorkbook();
             int cells = 0;
-            List<String> sheets = Arrays.asList(/*"Pricer Lookup", "Price Matrix", "Max Price Grid", */"Product Matrix"/*, "Investor Solutions(PI) ADJ", "Rate Calculator", "Investor Solutions(PI) RS"*/);
+            List<String> sheets = Arrays.asList(/*"Pricer Lookup", "Product Matrix", "Max Price Grid", */"Price Matrix"/*, "Investor Solutions(PI) ADJ", "Rate Calculator", "Investor Solutions(PI) RS"*/);
             for (Sheet sheet : workbook) {
                 /* Prime Ascent ADJ: E4 - AJ91 */
                 /* Row Headers: D4:D91 */
                 /* Col Headers: E3:AJ3 */
                 if (sheets.contains(sheet.getSheetName())) {
-                    CellRangeAddress range = CellRangeAddress.valueOf("E4:AJ91");
+                    CellRangeAddress range = CellRangeAddress.valueOf("C21:AZ363");
                     System.out.println(range.formatAsString());
                     System.out.println(range.getFirstRow());
                     System.out.println(range.getLastRow());
@@ -41,17 +43,11 @@ public class MFRateApplication {
                         for (int j = range.getFirstColumn(); j <= range.getLastColumn(); j++) {
                             Cell cell = row.getCell(j);
 
-                            Row x = sheet.getRow(i);
-                            Cell rowTitle = x.getCell(3);
-                            builder.append(cellAsString(rowTitle));
+                            String result = findInTable(sheet, "B21:B363", "C20:AZ20", cell.getAddress().formatAsString());
+                            System.out.println(result);
+                            builder.append(result);
                             builder.append(" | ");
-
-                            Row y = sheet.getRow(2);
-                            Cell colTitle = y.getCell(j);
-                            builder.append(cellAsString(colTitle));
-                            builder.append(" | ");
-
-                            builder.append(cellAsString(cell));
+                            builder.append(cellAsString(cell, true));
                             builder.append("\n");
                             cells++;
                         }
@@ -66,7 +62,26 @@ public class MFRateApplication {
         }
     }
 
-    public static String cellAsString(Cell cell) {
+    public static String findInTable(Sheet sheet, String rowTitleRefArray, String colTitleRefArray, String cell) {
+        CellReference reference = new CellReference(cell);
+        int rowIndex = reference.getRow();
+        int colIndex = reference.getCol();
+        System.out.println("Reference: " + reference.formatAsString());
+        System.out.println("Row: " + rowIndex + ", Col: " + colIndex);
+
+        CellRangeAddress rowRange = CellRangeAddress.valueOf(rowTitleRefArray);
+        System.out.println("RowTitleRef: " + rowRange.formatAsString());
+        Row rowOne = sheet.getRow(rowIndex);
+        Cell rowTitle = rowOne.getCell(rowRange.getFirstColumn());
+        CellRangeAddress colRange = CellRangeAddress.valueOf(colTitleRefArray);
+        System.out.println("RowTitleRef: " + colRange.formatAsString());
+        Row rowTwo = sheet.getRow(colRange.getFirstRow());
+        Cell colTitle = rowTwo.getCell(colIndex);
+
+        return cellAsString(rowTitle, true) + " | " + cellAsString(colTitle, true);
+    }
+
+    public static String cellAsString(Cell cell, boolean evaluate) {
         Object o = "";
         if (cell != null) {
             CellType type = cell.getCellType();
@@ -81,7 +96,9 @@ public class MFRateApplication {
                     o = cell.getBooleanCellValue();
                     break;
                 case FORMULA:
-                    o = cell.getCellFormula();
+                    FormulaEvaluator evaluator = cell.getSheet().getWorkbook().getCreationHelper().createFormulaEvaluator();
+                    CellValue value = evaluator.evaluate(cell);
+                    o = evaluate ? value.formatAsString() : cell.getCellFormula();
                     break;
                 case ERROR:
                     o = cell.getErrorCellValue();
