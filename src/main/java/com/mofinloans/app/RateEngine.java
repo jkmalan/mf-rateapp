@@ -1,7 +1,7 @@
 package com.mofinloans.app;
 
 import com.mofinloans.app.database.Database;
-import com.mofinloans.app.spreadsheet.Spreadsheet;
+import com.mofinloans.app.spreadsheet.SheetManager;
 
 public class RateEngine {
 
@@ -14,18 +14,18 @@ public class RateEngine {
     }
 
     private Database database;
-    private Spreadsheet spreadsheet;
+    private SheetManager spreadsheet;
 
     private RateEngine() {
         this.database = new Database();
-        this.spreadsheet = new Spreadsheet("C:\\Users\\John\\Downloads\\rentalpricing (2).xlsx");
+        this.spreadsheet = new SheetManager("C:\\Users\\John\\Downloads\\rentalpricing (2).xlsx");
     }
 
     public Database getDatabase() {
         return database;
     }
 
-    public Spreadsheet getSpreadsheet() {
+    public SheetManager getSpreadsheet() {
         return spreadsheet;
     }
 
