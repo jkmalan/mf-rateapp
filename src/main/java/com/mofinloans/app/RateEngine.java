@@ -29,5 +29,4 @@ public class RateEngine {
         return spreadsheet;
     }
 
-
 }
