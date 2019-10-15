@@ -10,10 +10,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-public class MFRateApplication {
+public class MFRateTool {
 
     public static void main(String[] args) {
-        RateCalculator rc = new RateCalculator(RateEngine.getEngine().getDatabase());
+        Engine engine = new RateEngine();
+        BigDecimal rate = engine.getCalculator().calculateBaseRate(63, 702);
+        System.out.println(rate);
+
+
+        /* Old Code, worked fine but ugly af, so rebuilding it all, probably doesnt work anymore
+        RateCalculator rc = new RateCalculator(engine.getDatabase());
         BigDecimal rate = rc.getBaseRate(63.0, 701.0);
         System.out.println(rate);
 
@@ -21,8 +27,8 @@ public class MFRateApplication {
         if (run) {
             try {
                 FileOutputStream stream = new FileOutputStream(new File("./output.txt"));
-                SheetManager sheetMgr = RateEngine.getEngine().getSpreadsheet();
-                Database database = RateEngine.getEngine().getDatabase();
+                SheetManager sheetMgr = null;
+                Database database = engine.getDatabase();
 
                 sheetMgr.setSheet("Product Matrix");
                 CellRangeAddress range = CellRangeAddress.valueOf("E4:AJ91");
@@ -44,6 +50,7 @@ public class MFRateApplication {
                 ex.printStackTrace();
             }
         }
+        */
     }
 
 }

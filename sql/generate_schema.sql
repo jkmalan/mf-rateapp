@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS `ratesheet_defaults` (
 CREATE TABLE IF NOT EXISTS `bkt_ltv` (
     `id` INT AUTO_INCREMENT,
     `ltv_min` NUMERIC,
+    `ltv_max` NUMERIC,
     PRIMARY KEY (`id`)
 );
 
@@ -21,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `bkt_ltv` (
 CREATE TABLE IF NOT EXISTS `bkt_fico` (
     `id` INT AUTO_INCREMENT,
     `fico_min` NUMERIC,
+    `fico_max` NUMERIC,
     PRIMARY KEY (`id`)
 );
 
@@ -28,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `bkt_fico` (
 CREATE TABLE IF NOT EXISTS `bkt_dscr` (
     `id` INT AUTO_INCREMENT,
     `dscr_min` NUMERIC,
+    `dscr_max` NUMERIC,
     PRIMARY KEY (`id`)
 );
 
@@ -35,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `bkt_dscr` (
 CREATE TABLE IF NOT EXISTS `bkt_reserve` (
     `id` INT AUTO_INCREMENT,
     `reserve_min` NUMERIC,
+    `reserve_max` NUMERIC,
     PRIMARY KEY (`id`)
 );
 
@@ -42,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `bkt_reserve` (
 CREATE TABLE IF NOT EXISTS `bkt_balance` (
     `id` INT AUTO_INCREMENT,
     `balance_min` NUMERIC,
+    `balance_max` NUMERIC,
     PRIMARY KEY (`id`)
 );
 
@@ -91,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `bkt_term` (
 CREATE TABLE IF NOT EXISTS `prod_fico` (
     `id` INT AUTO_INCREMENT,
     `fico_min` NUMERIC,
+    `fico_max` NUMERIC,
     `fico_map` NUMERIC,
     PRIMARY KEY (`id`)
 );
@@ -99,6 +105,7 @@ CREATE TABLE IF NOT EXISTS `prod_fico` (
 CREATE TABLE IF NOT EXISTS `prod_balance` (
     `id` INT AUTO_INCREMENT,
     `balance_min` NUMERIC,
+    `balance_max` NUMERIC,
     `balance_map` NUMERIC,
     PRIMARY KEY (`id`)
 );

@@ -27,7 +27,7 @@ public class ProductMatrix {
                 "AND d.dscr_man < ? AND d.dscr_max >= ? " +
                 "AND lt.loan_code = ?;";
         try {
-            PreparedStatement statement = database.getPreparedStatement(query);
+            PreparedStatement statement = database.prepare(query);
             statement.setInt(1, fico);
             statement.setInt(2, fico);
             statement.setInt(3, loan_amount);
@@ -35,7 +35,7 @@ public class ProductMatrix {
             statement.setInt(5, dscr);
             statement.setInt(6, dscr);
             statement.setString(7, loan_type);
-            ResultSet result = database.executePreparedStatement(statement);
+            ResultSet result = database.query(statement);
 
             if (result.next()) {
                 max_ltv = result.getInt("max_ltv");

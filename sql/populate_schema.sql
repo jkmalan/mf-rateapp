@@ -1,7 +1,7 @@
 USE `mf_ratetool`;
 
 INSERT INTO `ratesheet_defaults`
-    (`code`, `value`)
+    (`key`, `value`)
     VALUES
            ('base_price', '102.0000'),
            ('base_rate', '0.05950'),
@@ -11,18 +11,18 @@ INSERT INTO `ratesheet_defaults`
 
 # Practice values for base rate testing
 INSERT INTO `bkt_ltv`
-    (`ltv_min`)
+    (`ltv_min`, `ltv_max`)
 VALUES
-    (70),
-    (65),
-    (60);
+    (70, NULL),
+    (65, 70),
+    (60, 65);
 
 INSERT INTO `bkt_fico`
-    (`fico_min`)
+    (`fico_min`, `fico_max`)
 VALUES
-    (740),
-    (700),
-    (660);
+    (740, NULL),
+    (700, 740),
+    (660, 700);
 
 INSERT INTO `adj_ltv_vs_fico`
     (`bkt_ltv`, `bkt_fico`, `rate_adj`)

@@ -27,8 +27,9 @@ public class RateCalculator {
 
     private void getLtvMap() {
         String query = "SELECT * FROM bkt_ltv;";
-        ResultSet result = database.execute(query);
+        PreparedStatement statement = database.prepare(query);
         try {
+            ResultSet result = statement.executeQuery();
             while (result.next()) {
                 Integer id = result.getInt("id");
                 BigDecimal ltvMin = result.getBigDecimal("ltv_min");
@@ -37,13 +38,20 @@ public class RateCalculator {
             result.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
     private void getFicoMap() {
         String query = "SELECT * FROM bkt_fico";
-        ResultSet result = database.execute(query);
+        PreparedStatement statement = database.prepare(query);
         try {
+            ResultSet result = statement.executeQuery();
             while (result.next()) {
                 Integer id = result.getInt("id");
                 BigDecimal ficoMin = result.getBigDecimal("fico_min");
@@ -52,12 +60,17 @@ public class RateCalculator {
             result.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
-    public RateResult calculate(String state, String purpose, String property, String loan, int fico, int price, int rent, int months) {
-
-        return RateResult.INELIGIBLE;
+    public Calculation calculate() {
+        return null;
     }
 
     public BigDecimal getBaseRate(double ltv, double fico) {
@@ -91,13 +104,12 @@ public class RateCalculator {
         BigDecimal rate = new BigDecimal(-1);
 
         String query = "SELECT rate_adj FROM adj_ltv_vs_fico WHERE bkt_ltv=? AND bkt_fico=?;";
-        PreparedStatement ps = database.getPreparedStatement(query);
+        PreparedStatement statement = database.prepare(query);
         try {
-            ps.setInt(1, findLtv);
-            ps.setInt(2, findFico);
-            ResultSet result = ps.executeQuery();
+            statement.setInt(1, findLtv);
+            statement.setInt(2, findFico);
+            ResultSet result = statement.executeQuery();
             if (result.next()) {
-
                 System.out.println("findLTV: " + findLtv + ", findFico: " + findFico + "rate_adj: " + result.getBigDecimal(1));
                 rate = result.getBigDecimal("rate_adj");
             }
