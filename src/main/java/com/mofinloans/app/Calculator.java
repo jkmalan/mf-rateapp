@@ -23,12 +23,14 @@ public class Calculator {
 
     public BigDecimal calculateBaseRate(double ltv, double fico) {
         BigDecimal rate = new BigDecimal(0);
-
         String query =
                 "SELECT ltv_min, fico_min, rate_adj FROM adj_ltv_vs_fico AS adj " +
                 "    INNER JOIN bkt_ltv AS bl ON adj.bkt_ltv = bl.id " +
                 "    INNER JOIN bkt_fico AS bf ON adj.bkt_fico = bf.id " +
-                "    WHERE ltv_min < ? AND fico_min < ? LIMIT 1;";
+                "    WHERE ltv_min < ? " +
+                        "AND ltv_max >= ?" +
+                        "AND fico_min < ? " +
+                        "AND fico_max >= ?;";
         PreparedStatement statement = database.prepare(query);
         if (statement == null) {
             return rate;
@@ -36,7 +38,9 @@ public class Calculator {
 
         try {
             statement.setDouble(1, ltv);
-            statement.setDouble(2, fico);
+            statement.setDouble(2, ltv);
+            statement.setDouble(3, fico);
+            statement.setDouble(4, fico);
             ResultSet result = database.query(statement);
             if (result != null && result.next()) {
                 rate = result.getBigDecimal("rate_adj");

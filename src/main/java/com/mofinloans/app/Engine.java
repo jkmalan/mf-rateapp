@@ -8,6 +8,8 @@ public interface Engine {
 
     public Database getDatabase();
 
+    public SheetImporter getImporter();
+
     public Calculator getCalculator();
 
 }

@@ -6,11 +6,13 @@ public class RateEngine implements Engine {
 
     private Configuration configuration;
     private Database database;
+    private SheetImporter importer;
     private Calculator calculator;
 
     public RateEngine() {
         this.configuration = new PropertiesConfiguration();
         this.database = new Database(configuration);
+        this.importer = new SheetImporter(configuration, database);
         this.calculator = new Calculator(database);
     }
 
@@ -20,6 +22,10 @@ public class RateEngine implements Engine {
 
     public Database getDatabase() {
         return database;
+    }
+
+    public SheetImporter getImporter() {
+        return importer;
     }
 
     public Calculator getCalculator() {
