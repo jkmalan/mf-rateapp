@@ -13,40 +13,40 @@ CREATE TABLE IF NOT EXISTS `ratesheet_defaults` (
 # Contains bucket values for fico scores
 CREATE TABLE IF NOT EXISTS `bkt_ltv` (
     `id` INT AUTO_INCREMENT,
-    `ltv_min` NUMERIC,
-    `ltv_max` NUMERIC,
+    `ltv_min` NUMERIC(9,2),
+    `ltv_max` NUMERIC(9,2),
     PRIMARY KEY (`id`)
 );
 
 # Contains bucket values for fico scores
 CREATE TABLE IF NOT EXISTS `bkt_fico` (
     `id` INT AUTO_INCREMENT,
-    `fico_min` NUMERIC,
-    `fico_max` NUMERIC,
+    `fico_min` NUMERIC(9,2),
+    `fico_max` NUMERIC(9,2),
     PRIMARY KEY (`id`)
 );
 
 # Contains bucket values for dscrs
 CREATE TABLE IF NOT EXISTS `bkt_dscr` (
     `id` INT AUTO_INCREMENT,
-    `dscr_min` NUMERIC,
-    `dscr_max` NUMERIC,
+    `dscr_min` NUMERIC(9,2),
+    `dscr_max` NUMERIC(9,2),
     PRIMARY KEY (`id`)
 );
 
 # Contains bucket values for monthly reserves
 CREATE TABLE IF NOT EXISTS `bkt_reserve` (
     `id` INT AUTO_INCREMENT,
-    `reserve_min` NUMERIC,
-    `reserve_max` NUMERIC,
+    `reserve_min` NUMERIC(9,2),
+    `reserve_max` NUMERIC(9,2),
     PRIMARY KEY (`id`)
 );
 
 # Contains bucket values for loan balances
 CREATE TABLE IF NOT EXISTS `bkt_balance` (
     `id` INT AUTO_INCREMENT,
-    `balance_min` NUMERIC,
-    `balance_max` NUMERIC,
+    `balance_min` NUMERIC(9,2),
+    `balance_max` NUMERIC(9,2),
     PRIMARY KEY (`id`)
 );
 
@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `bkt_purpose` (
 CREATE TABLE IF NOT EXISTS `bkt_state` (
     `id` INT AUTO_INCREMENT,
     `state` VARCHAR(255),
+    `tier` INT,
     PRIMARY KEY (`id`)
 );
 
@@ -95,18 +96,18 @@ CREATE TABLE IF NOT EXISTS `bkt_term` (
 # Contains map values for product table fico scores
 CREATE TABLE IF NOT EXISTS `prod_fico` (
     `id` INT AUTO_INCREMENT,
-    `fico_min` NUMERIC,
-    `fico_max` NUMERIC,
-    `fico_map` NUMERIC,
+    `fico_min` NUMERIC(9,2),
+    `fico_max` NUMERIC(9,2),
+    `fico_map` NUMERIC(9,2),
     PRIMARY KEY (`id`)
 );
 
 # Contains map values for product table loan balances
 CREATE TABLE IF NOT EXISTS `prod_balance` (
     `id` INT AUTO_INCREMENT,
-    `balance_min` NUMERIC,
-    `balance_max` NUMERIC,
-    `balance_map` NUMERIC,
+    `balance_min` NUMERIC(9,2),
+    `balance_max` NUMERIC(9,2),
+    `balance_map` NUMERIC(9,2),
     PRIMARY KEY (`id`)
 );
 
