@@ -63,16 +63,4 @@ public class SheetManager {
         return sheet.getRow(range.getFirstRow()).getCell(address.getColumn());
     }
 
-    public String getString(Cell cell, boolean evaluate) {
-        DataFormatter formatter = new DataFormatter();
-        String value = null;
-        if (evaluate) {
-            FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
-            value = formatter.formatCellValue(cell, evaluator);
-        } else {
-            value = formatter.formatCellValue(cell);
-        }
-        return value;
-    }
-
 }

@@ -10,11 +10,12 @@ CREATE TABLE IF NOT EXISTS `ratesheet_defaults` (
     PRIMARY KEY (`key`)
 );
 
-# Contains bucket values for fico scores
+# Contains bucket values for ltvs
 CREATE TABLE IF NOT EXISTS `bkt_ltv` (
     `id` INT AUTO_INCREMENT,
     `ltv_min` NUMERIC(9,2),
     `ltv_max` NUMERIC(9,2),
+    `display` VARCHAR(255),
     PRIMARY KEY (`id`)
 );
 
@@ -23,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `bkt_fico` (
     `id` INT AUTO_INCREMENT,
     `fico_min` NUMERIC(9,2),
     `fico_max` NUMERIC(9,2),
+    `display` VARCHAR(255),
     PRIMARY KEY (`id`)
 );
 
@@ -31,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `bkt_dscr` (
     `id` INT AUTO_INCREMENT,
     `dscr_min` NUMERIC(9,2),
     `dscr_max` NUMERIC(9,2),
+    `display` VARCHAR(255),
     PRIMARY KEY (`id`)
 );
 
@@ -39,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `bkt_reserve` (
     `id` INT AUTO_INCREMENT,
     `reserve_min` NUMERIC(9,2),
     `reserve_max` NUMERIC(9,2),
+    `display` VARCHAR(255),
     PRIMARY KEY (`id`)
 );
 
@@ -47,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `bkt_balance` (
     `id` INT AUTO_INCREMENT,
     `balance_min` NUMERIC(9,2),
     `balance_max` NUMERIC(9,2),
+    `display` VARCHAR(255),
     PRIMARY KEY (`id`)
 );
 
@@ -62,6 +67,8 @@ CREATE TABLE IF NOT EXISTS `bkt_state` (
     `id` INT AUTO_INCREMENT,
     `state` VARCHAR(255),
     `tier` INT,
+    `include` BOOLEAN,
+    `display` VARCHAR(255),
     PRIMARY KEY (`id`)
 );
 
@@ -69,6 +76,7 @@ CREATE TABLE IF NOT EXISTS `bkt_state` (
 CREATE TABLE IF NOT EXISTS `bkt_property` (
     `id` INT AUTO_INCREMENT,
     `property` VARCHAR(255),
+    `display` VARCHAR(255),
     PRIMARY KEY (`id`)
 );
 
@@ -82,7 +90,8 @@ CREATE TABLE IF NOT EXISTS `bkt_amortization` (
 # Contains bucket values for prepayment penalty terms
 CREATE TABLE IF NOT EXISTS `bkt_prepayment` (
     `id` INT AUTO_INCREMENT,
-    `prepayment` VARCHAR(255),
+    `prepayment` NUMERIC(9,2),
+    `display` VARCHAR(255),
     PRIMARY KEY (`id`)
 );
 
