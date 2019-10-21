@@ -12,13 +12,24 @@ import java.util.Properties;
  */
 public class Database {
 
-    private Configuration config;
+    private final String dbHost;
+    private final String dbPort;
+    private final String dbName;
+    private final String dbUser;
+    private final String dbPass;
 
     private Connection connection = null;
 
     public Database(Configuration config) {
-        this.config = config;
-        connect();
+        this.dbHost = config.getString("db.host");
+        this.dbPort = config.getString("db.port");
+        this.dbName = config.getString("db.name");
+        this.dbUser = config.getString("db.user");
+        this.dbPass = config.getString("db.pass");
+
+        if (connect()) {
+
+        }
     }
 
     /**
@@ -31,16 +42,9 @@ public class Database {
             return true;
         }
 
-        String source = "jdbc:mysql://"
-                + config.getString("db.host") + ":"
-                + config.getString("db.port") + "/"
-                + config.getString("db.name");
-        Properties properties = new Properties();
-        properties.put("user", config.getString("db.user"));
-        properties.put("password", config.getString("db.pass"));
-
+        String source = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName;
         try {
-            connection = DriverManager.getConnection(source, properties);
+            connection = DriverManager.getConnection(source, dbUser, dbPass);
             return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
