@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS `bkt_balance` (
 CREATE TABLE IF NOT EXISTS `bkt_purpose` (
     `id` INT AUTO_INCREMENT,
     `purpose` VARCHAR(255),
+    `display` VARCHAR(255),
     PRIMARY KEY (`id`)
 );
 
@@ -84,6 +85,7 @@ CREATE TABLE IF NOT EXISTS `bkt_property` (
 CREATE TABLE IF NOT EXISTS `bkt_amortization` (
     `id` INT AUTO_INCREMENT,
     `amortization` VARCHAR(255),
+    `display` VARCHAR(255),
     PRIMARY KEY (`id`)
 );
 
@@ -99,6 +101,7 @@ CREATE TABLE IF NOT EXISTS `bkt_prepayment` (
 CREATE TABLE IF NOT EXISTS `bkt_term` (
     `id` INT AUTO_INCREMENT,
     `term` VARCHAR(255),
+    `display` VARCHAR(255),
     PRIMARY KEY (`id`)
 );
 
@@ -131,7 +134,9 @@ CREATE TABLE IF NOT EXISTS `adj_ltv_vs_fico` (
     `bkt_ltv` INT,
     `bkt_fico` INT,
     `rate_adj` DECIMAL(9,2),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`bkt_ltv`) REFERENCES `bkt_ltv`(`id`),
+    FOREIGN KEY (`bkt_fico`) REFERENCES `bkt_fico`(`id`)
 );
 
 # Lookup a rate adjustment based on ltv and dscr
@@ -140,7 +145,9 @@ CREATE TABLE IF NOT EXISTS `adj_ltv_vs_dscr` (
     `bkt_ltv` INT,
     `bkt_dscr` INT,
     `rate_adj` DECIMAL(9,2),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`bkt_ltv`) REFERENCES `bkt_ltv`(`id`),
+    FOREIGN KEY (`bkt_dscr`) REFERENCES `bkt_dscr`(`id`)
 );
 
 # Lookup a rate adjustment based on ltv and monthly reserves
@@ -149,7 +156,9 @@ CREATE TABLE IF NOT EXISTS `adj_ltv_vs_reserve` (
     `bkt_ltv` INT,
     `bkt_reserve` INT,
     `rate_adj` DECIMAL(9,2),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`bkt_ltv`) REFERENCES `bkt_ltv`(`id`),
+    FOREIGN KEY (`bkt_reserve`) REFERENCES `bkt_reserve`(`id`)
 );
 
 # Lookup a rate adjustment based on ltv and loan balance
@@ -158,7 +167,9 @@ CREATE TABLE IF NOT EXISTS `adj_ltv_vs_balance` (
     `bkt_ltv` INT,
     `bkt_balance` INT,
     `rate_adj` DECIMAL(9,2),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`bkt_ltv`) REFERENCES `bkt_ltv`(`id`),
+    FOREIGN KEY (`bkt_balance`) REFERENCES `bkt_balance`(`id`)
 );
 
 # Lookup a rate adjustment based on ltv and loan purpose
@@ -167,7 +178,9 @@ CREATE TABLE IF NOT EXISTS `adj_ltv_vs_purpose` (
     `bkt_ltv` INT,
     `bkt_purpose` INT,
     `rate_adj` DECIMAL(9,2),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`bkt_ltv`) REFERENCES `bkt_ltv`(`id`),
+    FOREIGN KEY (`bkt_purpose`) REFERENCES `bkt_purpose`(`id`)
 );
 
 # Lookup a rate adjustment based on ltv and state
@@ -176,7 +189,9 @@ CREATE TABLE IF NOT EXISTS `adj_ltv_vs_state` (
     `bkt_ltv` INT,
     `bkt_state` INT,
     `rate_adj` DECIMAL(9,2),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`bkt_ltv`) REFERENCES `bkt_ltv`(`id`),
+    FOREIGN KEY (`bkt_state`) REFERENCES `bkt_state`(`id`)
 );
 
 # Lookup a rate adjustment based on ltv and property type
@@ -185,7 +200,9 @@ CREATE TABLE IF NOT EXISTS `adj_ltv_vs_property` (
     `bkt_ltv` INT,
     `bkt_property` INT,
     `rate_adj` DECIMAL(9,2),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`bkt_ltv`) REFERENCES `bkt_ltv`(`id`),
+    FOREIGN KEY (`bkt_property`) REFERENCES `bkt_property`(`id`)
 );
 
 # Lookup a rate adjustment based on ltv and amortization
@@ -194,7 +211,9 @@ CREATE TABLE IF NOT EXISTS `adj_ltv_vs_amortization` (
     `bkt_ltv` INT,
     `bkt_amortization` INT,
     `rate_adj` DECIMAL(9,2),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`bkt_ltv`) REFERENCES `bkt_ltv`(`id`),
+    FOREIGN KEY (`bkt_amortization`) REFERENCES `bkt_amortization`(`id`)
 );
 
 # Lookup a rate adjustment based on ltv and prepayment penalty term
@@ -203,7 +222,9 @@ CREATE TABLE IF NOT EXISTS `adj_ltv_vs_prepayment` (
     `bkt_ltv` INT,
     `bkt_prepayment` INT,
     `rate_adj` DECIMAL(9,2),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`bkt_ltv`) REFERENCES `bkt_ltv`(`id`),
+    FOREIGN KEY (`bkt_prepayment`) REFERENCES `bkt_prepayment`(`id`)
 );
 
 # Lookup a rate adjustment based on loan term
@@ -211,7 +232,8 @@ CREATE TABLE IF NOT EXISTS `adj_term` (
     `id` INT AUTO_INCREMENT,
     `bkt_term` INT,
     `rate_adj` DECIMAL(9,2),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`bkt_term`) REFERENCES `bkt_term`(`id`)
 );
 
 ###
@@ -227,5 +249,9 @@ CREATE TABLE IF NOT EXISTS `max_ltv` (
     `prod_fico` INT,
     `prod_balance` INT,
     `max_ltv` DECIMAL(9,2),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`bkt_dscr`) REFERENCES `bkt_dscr`(`id`),
+    FOREIGN KEY (`bkt_purpose`) REFERENCES `bkt_purpose`(`id`),
+    FOREIGN KEY (`prod_fico`) REFERENCES `prod_fico`(`id`),
+    FOREIGN KEY (`prod_balance`) REFERENCES `prod_balance`(`id`)
 );

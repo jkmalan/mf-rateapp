@@ -3,7 +3,6 @@ package com.mofinloans.app.database;
 import com.mofinloans.app.Configuration;
 
 import java.sql.*;
-import java.util.Properties;
 
 /**
  *

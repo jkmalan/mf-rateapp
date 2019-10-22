@@ -79,11 +79,11 @@ VALUES
     (NULL, 75000.00, '<$75,000.00');
 
 INSERT INTO `bkt_purpose`
-    (`purpose`)
+    (`purpose`, `display`)
 VALUES
-    ('Purchase'),
-    ('Rate Refinance'),
-    ('Cash Out Refinance');
+    ('PUR', 'Purchase'),
+    ('RTR', 'Rate/Term Refinance'),
+    ('COR', 'Cash Out Refinance');
 
 INSERT INTO `bkt_state`
     (`state`, `tier`, `include`, `display`)
@@ -151,9 +151,9 @@ VALUES
     ('CND', 'Condo');
 
 INSERT INTO `bkt_amortization`
-    (`amortization`)
+    (`amortization`, `display`)
 VALUES
-    ('Interest Only');
+    ('IOA', 'Interest Only');
 
 INSERT INTO `bkt_prepayment`
     (`prepayment`, `display`)
@@ -166,17 +166,17 @@ VALUES
     (0, 'No Penalty');
 
 INSERT INTO `bkt_term`
-    (`term`)
+    (`term`, `display`)
 VALUES
-    ('1 YR BALLOON'),
-    ('3/1 ARM'),
-    ('5/1 ARM'),
-    ('7/1 ARM'),
-    ('10/1 ARM'),
-    ('10 YR FIX'),
-    ('15 YR FIX'),
-    ('30 YR FIX'),
-    ('40 YR FIX');
+    ('1 YR BALLOON', '1 Year Balloon'),
+    ('3/1 ARM', '3/1 Adjustable Rate Mortgage'),
+    ('5/1 ARM', '5/1 Adjustable Rate Mortgage'),
+    ('7/1 ARM', '7/1 Adjustable Rate Mortgage'),
+    ('10/1 ARM', '10/1 Adjustable Rate Mortgage'),
+    ('10 YR FIX', '10 Year Fixed Rate Mortgage'),
+    ('15 YR FIX', '15 Year Fixed Rate Mortgage'),
+    ('30 YR FIX', '30 Year Fixed Rate Mortgage'),
+    ('40 YR FIX', '40 Year Fixed Rate Mortgage');
 
 INSERT INTO `adj_ltv_vs_fico`
     (`bkt_ltv`, `bkt_fico`, `rate_adj`)

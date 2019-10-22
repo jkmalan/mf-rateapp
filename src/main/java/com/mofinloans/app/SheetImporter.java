@@ -9,6 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -54,7 +55,9 @@ public class SheetImporter {
     public void findTable(String sheetKEY, String rowHeaderKEY, String colHeaderKEY) {
         String query =
                 "INSERT INTO adj_ltv_vs_fico (bkt_ltv, bkt_fico, rate_adj) " +
-                        "VALUES (?, ?, ?);";
+                        "SELECT bl.id, bf.id, ? FROM bkt_ltv AS bl, bkt_fico AS bf " +
+                        "WHERE bl.ltv_min < ? AND ltv_max >= ? " +
+                            "AND bf.fico_min < ? AND bf.fico_max >= ?;";
         PreparedStatement statement = database.prepare(query);
 
         Sheet sheet = workbook.getSheet(sheetKEY);
@@ -66,12 +69,9 @@ public class SheetImporter {
             Cell rowTitleCELL = rowTitleCOL.getCell(rowHeaderREF.getFirstColumn());
             for (int colIndex = colHeaderREF.getFirstColumn(); colIndex <= colHeaderREF.getLastColumn(); colIndex++) {
                 Cell colTitleCELL = colTitleROW.getCell(colIndex);
-                Cell cell = rowTitleCOL.getCell(colIndex);
+                Cell cell  = rowTitleCOL.getCell(colIndex);
 
-                Map<Integer, String> entries = new HashMap<>();
-                entries.put(1, getString(rowTitleCELL, true));
-                entries.put(2, getString(colTitleCELL, true));
-                entries.put(3, getString(cell, true));
+
             }
         }
     }
