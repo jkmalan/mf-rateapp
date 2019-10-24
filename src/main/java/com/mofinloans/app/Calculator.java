@@ -15,10 +15,28 @@ public class Calculator {
         this.database = database;
     }
 
-    public Calculation calculate(double ltv, double fico) {
-        BigDecimal baseRate = calculateBaseRate(ltv, fico);
+    public BigDecimal calculate(double ltv,
+                                 double fico,
+                                 double dscr,
+                                 double reserve,
+                                 double balance,
+                                 String purpose,
+                                 String state,
+                                 String property,
+                                 String amortization,
+                                 String prepayment,
+                                 String term) {
 
-        return null;
+        return calculateBaseRate(ltv, fico)
+                        .add(calculateDscrAdjust(ltv, dscr))
+                        .add(calculateReserveAdjust(ltv, reserve))
+                        .add(calculateBalanceAdjust(ltv, balance))
+                        .add(calculatePurposeAdjust(ltv, purpose))
+                        .add(calculateStateAdjust(ltv, state))
+                        .add(calculatePropertyAdjust(ltv, property))
+                        .add(calculateAmortizationAdjust(ltv, amortization))
+                        .add(calculatePrepaymentAdjust(ltv, prepayment)
+                        .add(calculateTermAdjust(ltv, term)));
     }
 
     public BigDecimal calculateBaseRate(double ltv, double fico) {
@@ -50,6 +68,60 @@ public class Calculator {
             // TODO Log handler
         }
         return rate;
+    }
+
+    public BigDecimal calculateDscrAdjust(double ltv, double dscr) {
+        BigDecimal adjust = new BigDecimal(0);
+
+        return adjust;
+    }
+
+    public BigDecimal calculateReserveAdjust(double ltv, double reserve) {
+        BigDecimal adjust = new BigDecimal(0);
+
+        return adjust;
+    }
+
+    public BigDecimal calculateBalanceAdjust(double ltv, double balance) {
+        BigDecimal adjust = new BigDecimal(0);
+
+        return adjust;
+    }
+
+    public BigDecimal calculatePurposeAdjust(double ltv, String purpose) {
+        BigDecimal adjust = new BigDecimal(0);
+
+        return adjust;
+    }
+
+    public BigDecimal calculateStateAdjust(double ltv, String state) {
+        BigDecimal adjust = new BigDecimal(0);
+
+        return adjust;
+    }
+
+    public BigDecimal calculatePropertyAdjust(double ltv, String property) {
+        BigDecimal adjust = new BigDecimal(0);
+
+        return adjust;
+    }
+
+    public BigDecimal calculateAmortizationAdjust(double ltv, String amortization) {
+        BigDecimal adjust = new BigDecimal(0);
+
+        return adjust;
+    }
+
+    public BigDecimal calculatePrepaymentAdjust(double ltv, String prepayment) {
+        BigDecimal adjust = new BigDecimal(0);
+
+        return adjust;
+    }
+
+    public BigDecimal calculateTermAdjust(double ltv, String term) {
+        BigDecimal adjust = new BigDecimal(0);
+
+        return adjust;
     }
 
 }

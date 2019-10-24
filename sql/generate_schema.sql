@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `bkt_property` (
     PRIMARY KEY (`id`)
 );
 
-# Contains bucket values for property types
+# Contains bucket values for amortizations
 CREATE TABLE IF NOT EXISTS `bkt_amortization` (
     `id` INT AUTO_INCREMENT,
     `amortization` VARCHAR(255),
