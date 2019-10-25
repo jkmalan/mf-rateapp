@@ -61,7 +61,7 @@ public class Calculator {
                 adjust = result.getBigDecimal("rate_adj");
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getErrorCode());
+            System.out.println(ex.getMessage());
             // TODO Log handler
         }
         return adjust;
@@ -88,7 +88,7 @@ public class Calculator {
                 adjust = result.getBigDecimal("rate_adj");
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getErrorCode());
+            System.out.println(ex.getMessage());
             // TODO Log handler
         }
         return adjust;
@@ -115,7 +115,7 @@ public class Calculator {
                 adjust = result.getBigDecimal("rate_adj");
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getErrorCode());
+            System.out.println(ex.getMessage());
             // TODO Log handler
         }
         return adjust;
@@ -142,7 +142,7 @@ public class Calculator {
                 adjust = result.getBigDecimal("rate_adj");
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getErrorCode());
+            System.out.println(ex.getMessage());
             // TODO Log handler
         }
         return adjust;
@@ -169,7 +169,7 @@ public class Calculator {
                 adjust = result.getBigDecimal("rate_adj");
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getErrorCode());
+            System.out.println(ex.getMessage());
             // TODO Log handler
         }
         return adjust;

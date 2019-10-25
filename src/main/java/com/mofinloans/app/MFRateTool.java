@@ -23,8 +23,8 @@ public class MFRateTool {
         String purpose = "COR";
         String state = "NY";
         String property = "CND";
-        String amortization = "IOA";
-        int prepayment = 36;
+        String amortization = "";
+        int prepayment = 0;
         String term = "30 YR FIX";
 
         BigDecimal rate = new BigDecimal(0.05950);
