@@ -15,14 +15,14 @@ public class MFRateTool {
 
     public static void main(String[] args) {
         Engine engine = new RateEngine();
-        double ltv = 63.00;
-        double fico = 702.00;
-        double dscr = .90;
-        double reserve = 1.0;
-        double balance = 600000;
-        String purpose = "COR";
-        String state = "NY";
-        String property = "CND";
+        double ltv = 66.00;
+        double fico = 690.00;
+        double dscr = 0.90;
+        double reserve = 1.00;
+        double balance = 400000.00;
+        String purpose = "PUR";
+        String state = "CA";
+        String property = "SFR";
         String amortization = "";
         int prepayment = 0;
         String term = "30 YR FIX";
@@ -30,46 +30,46 @@ public class MFRateTool {
         BigDecimal rate = new BigDecimal(0.05950);
 
         BigDecimal adjFico = engine.getCalculator().calculateFicoAdjust(ltv, fico);
-        System.out.println(adjFico);
+        System.out.println("LTV vs. FICO: " + adjFico);
         rate = rate.add(adjFico);
 
         BigDecimal adjDscr = engine.getCalculator().calculateDscrAdjust(ltv, dscr);
-        System.out.println(adjDscr);
+        System.out.println("LTV vs. DSCR: " + adjDscr);
         rate = rate.add(adjDscr);
 
         BigDecimal adjReserve = engine.getCalculator().calculateReserveAdjust(ltv, reserve);
-        System.out.println(adjReserve);
+        System.out.println("LTV vs. Reserves: " + adjReserve);
         rate = rate.add(adjReserve);
 
         BigDecimal adjBalance = engine.getCalculator().calculateBalanceAdjust(ltv, balance);
-        System.out.println(adjBalance);
+        System.out.println("LTV vs. Balance: " + adjBalance);
         rate = rate.add(adjBalance);
 
         BigDecimal adjPurpose = engine.getCalculator().calculatePurposeAdjust(ltv, purpose);
-        System.out.println(adjPurpose);
+        System.out.println("LTV vs. Purpose: " + adjPurpose);
         rate = rate.add(adjPurpose);
 
         BigDecimal adjState = engine.getCalculator().calculateStateAdjust(ltv, state);
-        System.out.println(adjState);
+        System.out.println("LTV vs. State: " + adjState);
         rate = rate.add(adjState);
 
         BigDecimal adjProperty = engine.getCalculator().calculatePropertyAdjust(ltv, property);
-        System.out.println(adjProperty);
+        System.out.println("LTV vs. Property: " + adjProperty);
         rate = rate.add(adjProperty);
 
         BigDecimal adjAmortization = engine.getCalculator().calculateAmortizationAdjust(ltv, amortization);
-        System.out.println(adjAmortization);
+        System.out.println("LTV vs. Amortization: " + adjAmortization);
         rate = rate.add(adjAmortization);
 
         BigDecimal adjPrepayment = engine.getCalculator().calculatePrepaymentAdjust(ltv, prepayment);
-        System.out.println(adjPrepayment);
+        System.out.println("LTV vs. Prepayment: " + adjPrepayment);
         rate = rate.add(adjPrepayment);
 
         BigDecimal adjTerm = engine.getCalculator().calculateTermAdjust(ltv, term);
-        System.out.println(adjTerm);
+        System.out.println("Term: " + adjTerm);
         rate = rate.add(adjTerm);
 
-        System.out.println(rate.round(new MathContext(4)));
+        System.out.println("Estimated Rate: " + rate.round(new MathContext(4)));
 
 
         /* Old Code, worked fine but ugly af, so rebuilding it all, probably doesnt work anymore

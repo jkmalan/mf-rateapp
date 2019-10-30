@@ -40,7 +40,7 @@ public class Calculator {
     }
 
     public BigDecimal calculateFicoAdjust(double ltv, double fico) {
-        BigDecimal adjust = new BigDecimal(0);
+        BigDecimal adjust = new BigDecimal("0.00000");
         String query =
                 "SELECT ltv_min, fico_min, rate_adj FROM adj_ltv_vs_fico AS adj " +
                 "INNER JOIN bkt_ltv AS bl ON adj.bkt_ltv = bl.id " +
@@ -68,7 +68,7 @@ public class Calculator {
     }
 
     public BigDecimal calculateDscrAdjust(double ltv, double dscr) {
-        BigDecimal adjust = new BigDecimal(0);
+        BigDecimal adjust = new BigDecimal("0.00000");
         String query =
                 "SELECT ltv_min, dscr_min, rate_adj FROM adj_ltv_vs_dscr AS adj " +
                         "INNER JOIN bkt_ltv AS bl ON adj.bkt_ltv = bl.id " +
@@ -95,7 +95,7 @@ public class Calculator {
     }
 
     public BigDecimal calculateReserveAdjust(double ltv, double reserve) {
-        BigDecimal adjust = new BigDecimal(0);
+        BigDecimal adjust = new BigDecimal("0.00000");
         String query =
                 "SELECT ltv_min, reserve_min, rate_adj FROM adj_ltv_vs_reserve AS adj " +
                         "INNER JOIN bkt_ltv AS bl ON adj.bkt_ltv = bl.id " +
@@ -122,7 +122,7 @@ public class Calculator {
     }
 
     public BigDecimal calculateBalanceAdjust(double ltv, double balance) {
-        BigDecimal adjust = new BigDecimal(0);
+        BigDecimal adjust = new BigDecimal("0.00000");
         String query =
                 "SELECT ltv_min, balance_min, rate_adj FROM adj_ltv_vs_balance AS adj " +
                         "INNER JOIN bkt_ltv AS bl ON adj.bkt_ltv = bl.id " +
@@ -149,7 +149,7 @@ public class Calculator {
     }
 
     public BigDecimal calculatePurposeAdjust(double ltv, String purpose) {
-        BigDecimal adjust = new BigDecimal(0);
+        BigDecimal adjust = new BigDecimal("0.00000");
         String query =
                 "SELECT ltv_min, purpose, rate_adj FROM adj_ltv_vs_purpose AS adj " +
                         "INNER JOIN bkt_ltv AS bl ON adj.bkt_ltv = bl.id " +
@@ -176,7 +176,7 @@ public class Calculator {
     }
 
     public BigDecimal calculateStateAdjust(double ltv, String state) {
-        BigDecimal adjust = new BigDecimal(0);
+        BigDecimal adjust = new BigDecimal("0.00000");
         String query =
                 "SELECT ltv_min, state, rate_adj FROM adj_ltv_vs_state AS adj " +
                         "INNER JOIN bkt_ltv AS bl ON adj.bkt_ltv = bl.id " +
@@ -203,7 +203,7 @@ public class Calculator {
     }
 
     public BigDecimal calculatePropertyAdjust(double ltv, String property) {
-        BigDecimal adjust = new BigDecimal(0);
+        BigDecimal adjust = new BigDecimal("0.00000");
         String query =
                 "SELECT ltv_min, property, rate_adj FROM adj_ltv_vs_property AS adj " +
                         "INNER JOIN bkt_ltv AS bl ON adj.bkt_ltv = bl.id " +
@@ -230,7 +230,7 @@ public class Calculator {
     }
 
     public BigDecimal calculateAmortizationAdjust(double ltv, String amortization) {
-        BigDecimal adjust = new BigDecimal(0);
+        BigDecimal adjust = new BigDecimal("0.00000");
         String query =
                 "SELECT ltv_min, amortization, rate_adj FROM adj_ltv_vs_amortization AS adj " +
                         "INNER JOIN bkt_ltv AS bl ON adj.bkt_ltv = bl.id " +
@@ -257,7 +257,7 @@ public class Calculator {
     }
 
     public BigDecimal calculatePrepaymentAdjust(double ltv, int prepayment) {
-        BigDecimal adjust = new BigDecimal(0);
+        BigDecimal adjust = new BigDecimal("0.00000");
         String query =
                 "SELECT ltv_min, prepayment, rate_adj FROM adj_ltv_vs_prepayment AS adj " +
                         "INNER JOIN bkt_ltv AS bl ON adj.bkt_ltv = bl.id " +
@@ -284,7 +284,7 @@ public class Calculator {
     }
 
     public BigDecimal calculateTermAdjust(double ltv, String term) {
-        BigDecimal adjust = new BigDecimal(0);
+        BigDecimal adjust = new BigDecimal("0.00000");
         String query =
                 "SELECT term, rate_adj FROM adj_term AS adj " +
                         "INNER JOIN bkt_term AS bt ON adj.bkt_term = bt.id " +
