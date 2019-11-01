@@ -1,5 +1,6 @@
-package com.mofinloans.app;
+package com.mofinloans.app.spreadsheet;
 
+import com.mofinloans.app.Configuration;
 import com.mofinloans.app.database.Database;
 
 import org.apache.poi.ss.usermodel.*;
