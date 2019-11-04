@@ -3,6 +3,8 @@ package com.mofinloans.app.spreadsheet;
 import com.mofinloans.app.Configuration;
 import com.mofinloans.app.database.Database;
 
+import com.mofinloans.app.spreadsheet.api.XManager;
+import com.mofinloans.app.spreadsheet.api.XWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -83,6 +85,10 @@ public class SheetImporter {
             value = formatter.formatCellValue(cell);
         }
         return value;
+    }
+
+    public void convertTable() {
+        XWorkbook wb = new XWorkbook("Verus Rate Sheet 20190827.xlsx");
     }
 
 }
